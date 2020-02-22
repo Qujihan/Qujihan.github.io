@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="渠继涵">
+  <meta name="keywords" content="">
+  <title>记录手册—Hexo搭建博客以及日常维护 - 渠哈哈的博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>渠哈哈的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" false
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期六, 十二月 7日 2019, 1:29 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    997 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>关于我Hexo的搭建的一些记录，如有疑问，欢迎留言或者发送邮件到<a href="mailto:qujihan@163.com">qujihan@163.com</a></p>
+<a id="more"></a>
+
+
+
+<h3 id="零、准备工具（Windows）"><a href="#零、准备工具（Windows）" class="headerlink" title="零、准备工具（Windows）"></a>零、准备工具（Windows）</h3><h4 id="本文行文顺序"><a href="#本文行文顺序" class="headerlink" title="本文行文顺序"></a>本文行文顺序</h4><ol>
+<li>先在本地设置好基本配置，可以通过 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 预览</li>
+<li>在Github设置好，开启Pages服务</li>
+<li>（可选项）绑定域名</li>
+<li>一些问题</li>
+<li>日常维护</li>
+</ol>
+<h4 id="准备安装的软件与账号等"><a href="#准备安装的软件与账号等" class="headerlink" title="准备安装的软件与账号等"></a>准备安装的软件与账号等</h4><ol>
+<li>Git</li>
+<li>Node.js</li>
+<li>Github等支持<strong>Pages</strong>服务的代码托管商账号</li>
+<li>安装Hexo：在git bash中输入：<code>npm install hexo-cli -g</code></li>
+<li>（可选项）一个自己喜欢的Hexo主题—&gt;<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo主题界面</a></li>
+<li>（可选项）购买一个域名</li>
+</ol>
+<h4 id="需要安装插件"><a href="#需要安装插件" class="headerlink" title="需要安装插件"></a>需要安装插件</h4><ul>
+<li><p>hexo-deployer-git插件：</p>
+<ul>
+<li><p>作用：将生成的public文件夹下的东西部署到Github</p>
+</li>
+<li><p>安装命令：在git bash中输入：<code>npm install hexo-deployer-git --save</code></p>
+</li>
+<li><p>将Hexo根目录的_config.yml中的deploy选项依照自己的需求更改。</p>
+<pre><code class="yml">deploy:
+  type: git
+  repo: git@github.com:Qujihan/qujihan.github.io.git #git仓库
+  branch: master #git仓库的分支</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="一、发布到Github"><a href="#一、发布到Github" class="headerlink" title="一、发布到Github"></a>一、发布到Github</h3><ol>
+<li><p>将hexo主目录与主题目录下的.git文件删除（如果有的话）（windows记得开启查看隐藏项目）</p>
+</li>
+<li><p>在Github中创建名为username.github.io的仓库，并复制其SSH地址</p>
+</li>
+<li><p>更改Hexo根目录的_config.yml中的deploy选项   <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">详见项目主页（点这里）</a></p>
+<p> 以下是我的，可以参考</p>
+<pre><code class="yml"> deploy:
+   type: git
+   repo: git@github.com:Qujihan/qujihan.github.io.git #git仓库
+   branch: master #git仓库的分支</code></pre>
+</li>
+<li><p>打开git，执行<code>hexo g -d</code></p>
+</li>
+<li><p>打开网站地址（ 例如：<a href="https://qujihan.github.io" target="_blank" rel="noopener">https://qujihan.github.io</a> ）就可以看到了</p>
+</li>
+</ol>
+<p align="center">-----------------下面是将源码备份到Github中，可跳过-----------------</p>
+1. 在hexo主目录下打开git bash并执行`git init`
+
+<ol start="2">
+<li><p>在hexo文件夹右键打开git bash，执行<code>git checkout -b hexosrc</code></p>
+</li>
+<li><p>打开git，执行<code>git remote add origin 刚才复制的地址</code></p>
+</li>
+<li><p>依次执行<code>git add .</code>、<code>git commit -m &quot;backup hexosrc&quot;</code>、<code>git push -u origin hexosrc</code></p>
+</li>
+<li><p>打开GitHub查看有没有hexosrc分支</p>
+</li>
+<li><p>（可选）设置别名</p>
+<ol>
+<li><p>打开git bash，分别输入：</p>
+<pre><code class="shell">git config --global alias.backup &#39;!git add .&amp;&amp;git commit -m &quot;backup hexosrc&quot;&amp;&amp;git push&#39;
+
+git config --global alias.hexonet &#39;!hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&#39;
+
+git config --global alias.hexolocal &#39;!hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#39;
+
+git config --global alias.hexoall &#39;!hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; hexo s&#39;</code></pre>
+</li>
+<li><p>以后就可以使用以下操作了：</p>
+<ul>
+<li>备份Hexo源码到hexosrc分支命令：git backup</li>
+<li>渲染好网页并本地预览命令：git hexonet</li>
+<li>渲染好网页并部署到Github Page命令：git hexolocal</li>
+<li>渲染本地预览部署三部曲命令：git hexoall</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="二、绑定域名（没有买域名可以忽略）"><a href="#二、绑定域名（没有买域名可以忽略）" class="headerlink" title="二、绑定域名（没有买域名可以忽略）"></a>二、绑定域名（没有买域名可以忽略）</h3><ol>
+<li>在域名解析界面解析自己的域名（我是在腾讯云买的域名，这里以腾讯云为例）</li>
+<li>在博客项目主页打开setting页面，在下面找到Custom domain选项，填上自己的域名</li>
+<li>在hexo的source目录下新建一个不带有后缀的CNAME文件，使用记事本打开，将自己的域名写入</li>
+</ol>
+<h3 id="三、我的一些问题以及解决方案"><a href="#三、我的一些问题以及解决方案" class="headerlink" title="三、我的一些问题以及解决方案"></a>三、我的一些问题以及解决方案</h3><ol>
+<li><p>文章怎么插入图片？</p>
+<p>将Hexo根目录的_config.yml中的post_asset_folder改成true</p>
+</li>
+</ol>
+<h3 id="四、日常维护"><a href="#四、日常维护" class="headerlink" title="四、日常维护"></a>四、日常维护</h3><h4 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h4><h5 id="1、写文章"><a href="#1、写文章" class="headerlink" title="1、写文章"></a>1、写文章</h5><h5 id="2、编辑成Hexo识别的样子"><a href="#2、编辑成Hexo识别的样子" class="headerlink" title="2、编辑成Hexo识别的样子"></a>2、编辑成Hexo识别的样子</h5><ul>
+<li><p>在Hexo目录打开git bash输入<code>hexo new “文章名”</code></p>
+</li>
+<li><p>设置Front-matter</p>
+<ul>
+<li>设置不同的标签：<code>tags: [git,note]</code></li>
+<li>设置分类：<code>categories:  - A  - B</code>(这是两级分类，B是A的子类)</li>
+<li>设置永久链接：<code>permalink: VSCode-Cpp</code></li>
+<li>文章首页缩略图：<code>index_img: /img/example.jpg</code></li>
+<li>文章顶部大图：<code>banner_img: /img/example.jpg</code></li>
+</ul>
+</li>
+<li><p>设置摘要：<code>&lt;!-- more --&gt;</code></p>
+</li>
+</ul>
+<h4 id="换电脑了怎么恢复"><a href="#换电脑了怎么恢复" class="headerlink" title="换电脑了怎么恢复"></a>换电脑了怎么恢复</h4><ol>
+<li>打开Git执行<code>git clone -b hexosrc xxxxxxxx(SSH地址/Http地址)</code>，得到一个名为xxxxxx.github.io的文件夹</li>
+<li>随便创建一个文件夹（例如：hexo文件夹），打开文件夹并右键打卡git bash执行<code>hexo init</code></li>
+<li>按照文章前面的样子安装需要的插件</li>
+<li>将hexo文件夹里的node_modules，全部复制到名为xxxxxx.github.io的文件夹</li>
+<li>Over！（如果换电脑了，别忘了把起别名的那一步再来一遍）</li>
+</ol>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var notify = 'true' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "lIUVFnvUirJfUF0CjhXFqIJP-gzGzoHsz",
+        app_key: "CnpO2xWcovQj6agvm1K7CiTH",
+        placeholder: "（务必填上邮箱与昵称，否则无法评论哦！）",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "记录手册—Hexo搭建博客以及日常维护&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+      icon: "§"
+      
+    };
+    var el = "h1,h2,h3,h4".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

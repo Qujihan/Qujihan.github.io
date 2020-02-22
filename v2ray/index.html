@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="渠继涵">
+  <meta name="keywords" content="">
+  <title>环境搭建—V2ray科学上网 - 渠哈哈的博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>渠哈哈的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" false
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期六, 十二月 7日 2019, 1:18 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    569 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>下文皆为本人实验性操作，如参考请自行负法律责任</p>
+<a id="more"></a>
+
+<h2 id="零、情况简述"><a href="#零、情况简述" class="headerlink" title="零、情况简述"></a>零、情况简述</h2><ul>
+<li>VPS：Vlutr—日本—$5/M—CentOS7 <a href="https://my.vultr.com/" target="_blank" rel="noopener">链接</a></li>
+<li>Xshell 6 <a href="https://xshell.en.softonic.com/" target="_blank" rel="noopener">下载</a></li>
+<li>v2rayN  <a href="https://github.com/2dust/v2rayN/releases" target="_blank" rel="noopener">下载（选V2ray-core）</a></li>
+</ul>
+<h2 id="一、开启BBR"><a href="#一、开启BBR" class="headerlink" title="一、开启BBR"></a>一、开启BBR</h2><p><strong>（更新内核—&gt;开启BBR）</strong></p>
+<h3 id="①更新内核"><a href="#①更新内核" class="headerlink" title="①更新内核"></a>①更新内核</h3><ol>
+<li><p>查看系统现在的内核</p>
+<ul>
+<li><pre><code class="shell">  uname -r</code></pre>
+<p>  <img src="1.01.png" srcset="/img/loading.gif" alt="查看系统内核"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>启用 ELRepo 仓库</p>
+<ul>
+<li><pre><code class="shell">  sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+  sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</code></pre>
+<p>  <img src="1.02.png" srcset="/img/loading.gif" alt="启用 ELRepo 仓库"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>列出可用的系统内核相关包</p>
+<ul>
+<li><pre><code class="shell">  yum --disablerepo=&quot;*&quot; --enablerepo=&quot;elrepo-kernel&quot; list available</code></pre>
+<p>  <img src="1.03.png" srcset="/img/loading.gif" alt="可用的系统内核相关包"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li><p>安装最新的主线稳定内核（时间挺长的）</p>
+<ul>
+<li><pre><code class="shell">  yum --enablerepo=elrepo-kernel install kernel-ml</code></pre>
+<p>  <img src="1.04.png" srcset="/img/loading.gif" alt="安装最新的主线稳定内核"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li><p>查看系统的所有内核</p>
+<ul>
+<li><pre><code class="shell">  sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \&#39;</code></pre>
+<p>  <img src="1.05.png" srcset="/img/loading.gif" alt="查看系统的所有内核"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="6">
+<li><p>设置 GRUB 默认的内核版本</p>
+<ul>
+<li><pre><code class="shell">  sudo grub2-set-default X</code></pre>
+</li>
+<li><p><strong>第一个的索引值是0，这里我们选择最新的5.4.3。所以X应该为1</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="7">
+<li><p>重启 <code>sudo shutdown -r now</code></p>
+</li>
+<li><p>查看是否切换了，方法同1</p>
+</li>
+<li><p>删除其他内核</p>
+<ul>
+<li><pre><code class="shell">  rpm -qa | grep kernel
+  yum remove xxx xxx xxx xxx</code></pre>
+<p>  <img src="1.09.png" srcset="/img/loading.gif" alt="删除其他内核"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="②开启BBR"><a href="#②开启BBR" class="headerlink" title="②开启BBR"></a>②开启BBR</h3><ol>
+<li><p>修改sysctl配置</p>
+<ul>
+<li><pre><code class="shell">  echo &#39;net.core.default_qdisc=fq&#39; | sudo tee -a /etc/sysctl.conf
+  echo &#39;net.ipv4.tcp_congestion_control=bbr&#39; | sudo tee -a /etc/sysctl.conf
+  sudo sysctl -p</code></pre>
+<p>  <img src="2.01.png" srcset="/img/loading.gif" alt="修改并开启"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>确保BBR已经开启</p>
+<ul>
+<li><pre><code class="shell">  sudo sysctl net.ipv4.tcp_available_congestion_control
+  sudo sysctl -n net.ipv4.tcp_congestion_control
+  lsmod | grep bbr</code></pre>
+</li>
+<li><div><img src="2.02.png" srcset="/img/loading.gif"></div>
+
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、安装V2ray"><a href="#二、安装V2ray" class="headerlink" title="二、安装V2ray"></a>二、安装V2ray</h2><ol>
+<li><p>官方自动安装脚本</p>
+<ul>
+<li><pre><code class="shell">  bash &lt;(curl -L -s https://install.direct/go.sh)
+
+  #开启服务
+  systemctl start v2ray</code></pre>
+</li>
+</ul>
+</li>
+<li><p>关闭防火墙并禁止开启启动</p>
+<ul>
+<li><pre><code class="shell">  #查看所有的打开的窗口
+  firewall-cmd --zone=public --list-ports
+
+  #端口放行（xxxxx是安装成功后显示的端口号port）
+  firewall-cmd --zone=public --add-port=xxxxx/tcp --permanent
+
+  #重启防火墙
+  firewall-cmd --reload
+
+  #停止firewall（不用执行）
+  systemctl stop firewalld
+
+  #禁止firewall开机启动（不用执行）
+  systemctl disable firewalld</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、科学上网"><a href="#三、科学上网" class="headerlink" title="三、科学上网"></a>三、科学上网</h2><ol>
+<li><p>打开V2rayN，选择服务器—&gt;添加[VMess]服务器</p>
+</li>
+<li><p>按照你自己的情况填写</p>
+<ul>
+<li>地址：VPS分配的IP</li>
+<li>端口：在VPS安装后会给你</li>
+<li>用户ID：在VPS安装后会给你</li>
+<li>额外ID：默认64</li>
+<li>别名：随便，相当于备注</li>
+</ul>
+</li>
+<li><p><strong>如果以上信息忘了，可以执行</strong><code>cat /etc/v2ray/config.json</code><strong>查看</strong>（IP查看不了）</p>
+<p> <img src="3.01.png" srcset="/img/loading.gif" alt="开启V2ray服务"></p>
+</li>
+</ol>
+<h2 id="四、一些常用的命令"><a href="#四、一些常用的命令" class="headerlink" title="四、一些常用的命令"></a>四、一些常用的命令</h2><ol>
+<li>查看V2ray的状态：<code>sudo systemctl status v2ray</code></li>
+<li>启用V2ray：<code>sudo systemctl enable v2ray</code></li>
+<li>禁用V2ray：<code>sudo systemctl disable v2ray</code></li>
+<li>启动V2ray：<code>sudo systemctl start v2ray</code></li>
+<li>停止V2ray：<code>sudo systemctl stop v2ray</code></li>
+<li>重启V2ray：<code>sudo systemctl restart v2ray</code></li>
+</ol>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var notify = 'true' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "lIUVFnvUirJfUF0CjhXFqIJP-gzGzoHsz",
+        app_key: "CnpO2xWcovQj6agvm1K7CiTH",
+        placeholder: "（务必填上邮箱与昵称，否则无法评论哦！）",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "环境搭建—V2ray科学上网&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+      icon: "§"
+      
+    };
+    var el = "h1,h2,h3,h4".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

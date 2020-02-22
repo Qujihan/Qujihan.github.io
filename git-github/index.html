@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="渠继涵">
+  <meta name="keywords" content="">
+  <title>学习笔记—Git_Github - 渠哈哈的博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>渠哈哈的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" false
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期六, 十二月 7日 2019, 2:00 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    1.7k 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>一些Git的quick start与入门知识：配置信息，仓库的创建、提交、删除、重命名、查看日志、修改提交描述、给Git命令起别名、分支等</p>
+<a id="more"></a>
+
+<h3 id="1-初入手该做的事情——配置个人（作者）信息"><a href="#1-初入手该做的事情——配置个人（作者）信息" class="headerlink" title="1.初入手该做的事情——配置个人（作者）信息"></a>1.初入手该做的事情——配置个人（作者）信息</h3><h4 id="更改全局的信息"><a href="#更改全局的信息" class="headerlink" title="更改全局的信息"></a>更改全局的信息</h4><pre><code class="shell">#配置全局的作者邮箱
+git config --global user.email &quot;qujihan@163.com&quot;
+#配置全局的作者名字
+git config --global user.name &quot;Qu&quot;
+#可以在C:\Users\${username}\.gitconfig 可以查看用户的全局设置</code></pre>
+<h4 id="更改某个仓库的信息"><a href="#更改某个仓库的信息" class="headerlink" title="更改某个仓库的信息"></a>更改某个仓库的信息</h4><pre><code class="shell">#配置项目作者邮箱
+git config user.email &quot;qujihan@163.com&quot;
+#配置项目作者姓名
+git config user.name &quot;Qu&quot;
+#查看配置信息(信息一般在git目录下的config文件中)
+code git/config</code></pre>
+<h4 id="创建一个新的仓库"><a href="#创建一个新的仓库" class="headerlink" title="创建一个新的仓库"></a>创建一个新的仓库</h4><pre><code class="shell">#新建
+git init</code></pre>
+<h4 id="版本库忽略文件的配置"><a href="#版本库忽略文件的配置" class="headerlink" title="版本库忽略文件的配置"></a>版本库忽略文件的配置</h4><pre><code class="shell">#创建一堆文件
+touch a.txt b.txt c.txt d.txt e.txt f.txt
+#创建文件夹并且在其中创建文件
+mkdir test &amp;&amp; touch test/qu.txt
+#创建忽略文件
+touch .gitignore</code></pre>
+<p>忽略文件的配置：</p>
+<ol>
+<li><p>*.txt ：忽略所有的txt文件</p>
+</li>
+<li><p>a.txt ：忽略a.txt</p>
+</li>
+<li><p>*.txt  !a.txt ：忽略除了a.txt以外的所有txt</p>
+</li>
+<li><p>/test ：忽略test文件夹里面的内容</p>
+</li>
+</ol>
+<p><strong>当且仅当文件夹里的所有文件都被忽略的时候，使用git status才不显示这个文件</strong></p>
+<h3 id="2-Git使用中——接手新项目"><a href="#2-Git使用中——接手新项目" class="headerlink" title="2.Git使用中——接手新项目"></a>2.Git使用中——接手新项目</h3><h4 id="接手一个旧的仓库"><a href="#接手一个旧的仓库" class="headerlink" title="接手一个旧的仓库"></a>接手一个旧的仓库</h4><pre><code class="shell">#从github等网站克隆一个仓库（后面是克隆的地址）
+git clone https://github.com/Qujihan/OperatingSystem_Algorithm.git</code></pre>
+<h4 id="从版本库中删除文件"><a href="#从版本库中删除文件" class="headerlink" title="从版本库中删除文件"></a>从版本库中删除文件</h4><pre><code class="shell">#这样删除的话，本地和版本库中的a.cpp都删除了
+git rm a.cpp
+#这样可以从版本库中删除，但是本地是不删除的
+git rm -cached a.cpp</code></pre>
+<h4 id="更改文件的名字"><a href="#更改文件的名字" class="headerlink" title="更改文件的名字"></a>更改文件的名字</h4><pre><code class="shell">#讲xxx.cpp改成aaa.cpp
+git mv xxx.cpp aaa.cpp</code></pre>
+<h4 id="Git的流水线操作"><a href="#Git的流水线操作" class="headerlink" title="Git的流水线操作"></a>Git的流水线操作</h4><pre><code class="shell">#先创建一个文件
+touch a.cpp
+#将这个文件放到小推车里
+git add a.cpp
+#也可以全部添加进去
+git add .
+##将文件送到仓库
+git commit -m &quot;这里写一下提交情况&quot;</code></pre>
+<h4 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h4><pre><code class="shell">#查看所有的日志信息
+git log
+#查看最近一(或者n次)次的信息
+git log -1（n）
+#查看更加详细的信息
+git log -p
+#查看更加简短的信息
+git log -oneline
+#查看文件发生的变化
+git log --name-only
+#查看文件变化更多的信息（添加删除之类的）
+git log --name-status </code></pre>
+<h4 id="修改提交的描述"><a href="#修改提交的描述" class="headerlink" title="修改提交的描述"></a>修改提交的描述</h4><pre><code class="shell">#调用vim对提交信息进行修改
+git commit --amend</code></pre>
+<h3 id="3-Git的分支使用"><a href="#3-Git的分支使用" class="headerlink" title="3.Git的分支使用"></a>3.Git的分支使用</h3><h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><pre><code class="shell">#查看分支(绿色标志是当前分支)
+git branch
+#查看分支（包含远程分支:橘黄色）
+git branch -a
+#创建qu分支
+git branch qu
+#切换到qu分支
+git checkout qu
+#创建并切换分支qu
+git checkout -b qu
+#分支的合并（将qu分支合并到当前的分支中）
+git merge qu</code></pre>
+<p><strong><code>touch demo.cpp</code>后，在qu分支commit后，切换到master分支再ls是没有的。</strong></p>
+<p>当然，有时候需要删除。删除不能盲目删除，需要看看有没有被merge。</p>
+<pre><code class="shell">#查看已经merge的分支
+git branch --merge
+#查看没有merge的分支
+git branch --no--merge
+#删除分支qu(d-delete)
+git branch -d qu
+#强制删除分支qu（qu可能没有合并之类的）
+git branch -d qu</code></pre>
+<h4 id="分支之冲突"><a href="#分支之冲突" class="headerlink" title="分支之冲突"></a>分支之冲突</h4><p>两个分支merge到了master分支的时候，如果有冲突，需要在master分支中手动修改</p>
+<h4 id="分支之暂存"><a href="#分支之暂存" class="headerlink" title="分支之暂存"></a>分支之暂存</h4><p>场景：我在ask分支开发，但是bbs分支出现了毛病，我需要到bbs分支修改，但是ask分支的内容没有写完，提交不太好。但是不提交还不能切换分支。</p>
+<p>这时候就应该用到暂存功能</p>
+<pre><code class="shell">#暂存
+git stash
+#查看所有的暂存
+git stash list
+#恢复暂存
+git stash apply
+#恢复了，吧暂存区的内容删除（删除stash@{0}，名字在list中可以查看）
+git stash drop stash@{0}
+#使用pop就可以恢复+删除
+git stash pop</code></pre>
+<p><strong>新建的文件不会提交的暂存区，只有add后或者修改的文件才可以提交的暂存区</strong></p>
+<h3 id="4-Git的进阶使用"><a href="#4-Git的进阶使用" class="headerlink" title="4.Git的进阶使用"></a>4.Git的进阶使用</h3><h4 id="删除暂存中已经添加的文件-从版本库中恢复"><a href="#删除暂存中已经添加的文件-从版本库中恢复" class="headerlink" title="删除暂存中已经添加的文件/从版本库中恢复"></a>删除暂存中已经添加的文件/从版本库中恢复</h4><pre><code class="shell">#从暂存区中删除（第一次放入暂存区）
+git rm --cached a.cpp
+#撤销在暂存中的文件（第二次或者以后的删除）
+git reset HEAD a.cpp
+#将本地文件恢复到版本库中的版本
+git checkout -- a.cpp</code></pre>
+<h4 id="给Git命令起个别名"><a href="#给Git命令起个别名" class="headerlink" title="给Git命令起个别名"></a>给Git命令起个别名</h4><pre><code class="shell">#给commit起了一个c的别名
+git config --global alias.c commit</code></pre>
+<p><strong>起的别名都可以在gitconfig配置文件中看到</strong></p>
+<p>可以看出，Git 只是简单地将别名替换为对应的命令。 然而，你可能想要执行外部命令，而不是一个 Git 子命令。 如果是那样的话，可以在命令前面加入 <code>!</code> 符号，如：</p>
+<pre><code class="shell">git config --global alias.hexonet &#39;!hexo g &amp;&amp; hexo d&#39;</code></pre>
+<h4 id="Tag标签"><a href="#Tag标签" class="headerlink" title="Tag标签"></a>Tag标签</h4><pre><code class="shell">#查看所有的标签
+git tag
+#打标签（v1.0版本）
+git tag v1.0</code></pre>
+<h4 id="生成ZIP压缩包"><a href="#生成ZIP压缩包" class="headerlink" title="生成ZIP压缩包"></a>生成ZIP压缩包</h4><pre><code class="shell">git archive master --prefix=&#39;demo/&#39; --forma=zip &gt;demo.zip</code></pre>
+<h3 id="5-Github的使用"><a href="#5-Github的使用" class="headerlink" title="5.Github的使用"></a>5.Github的使用</h3><h4 id="SSH连接"><a href="#SSH连接" class="headerlink" title="SSH连接"></a>SSH连接</h4><pre><code class="shell">#生成ssh key
+ssh-keygen -t rsa -C &quot;qujihan@163.com&quot;
+#查看公钥
+cat ~/.ssh/id_rsa.pub</code></pre>
+<p><code>.pub</code> 文件是公钥，另一个则是私钥，将文件复制到github/gitee的ssh配置里面就可以了，如果重新生成了Key，可能连接不上，这时候需要删除git家目录下的known_hosts文件里的内    容（known_hosts与id_rsa.pub在同一个目录下）</p>
+<h4 id="本地与远程关联"><a href="#本地与远程关联" class="headerlink" title="本地与远程关联"></a>本地与远程关联</h4><pre><code class="shell">#将本地文件与服务器的仓库进行关联
+git remote add origin https://github.com/Qujihan/gitStudy.git
+#将文件推送到master分支
+git push -u origin master
+#将本地的分支qu与远程进行创建
+git push --set-upstream origin qu</code></pre>
+<h4 id="将远程分支下载到本地分支"><a href="#将远程分支下载到本地分支" class="headerlink" title="将远程分支下载到本地分支"></a>将远程分支下载到本地分支</h4><pre><code class="shell">#将远程的qu分支下载到本地的han分支
+git pull origin qu:han</code></pre>
+<h4 id="将远程分支删除"><a href="#将远程分支删除" class="headerlink" title="将远程分支删除"></a>将远程分支删除</h4><pre><code class="shell">#删除远程分支qu
+git push origin --delete qu</code></pre>
+<h3 id="6-日常中Git出现的问题以及解决方案"><a href="#6-日常中Git出现的问题以及解决方案" class="headerlink" title="6.日常中Git出现的问题以及解决方案"></a>6.日常中Git出现的问题以及解决方案</h3><ol>
+<li>warning: LF will be replaced by CRLF in<ul>
+<li>出现原因：windows中的换行符为 CRLF， 而在linux下的换行符为LF，所以在执行add . 时出现提示</li>
+<li>解决方法：git config –global core.autocrlf false</li>
+</ul>
+</li>
+</ol>
+<h4 id="7-Github中如何搜索开源项目"><a href="#7-Github中如何搜索开源项目" class="headerlink" title="7.Github中如何搜索开源项目"></a>7.Github中如何搜索开源项目</h4><p>在GitHub中，每一个项目都是由项目名(name)、描述(description)、源码与README.md组成，所以搜索的时候要按照这四部分搜索。当然还有一些限制因素，比如语言、时间、星星数量、Fork等因素</p>
+<ul>
+<li>in:name xxx // 按照项目名搜索</li>
+<li>in:readme xxx // 按照README搜索</li>
+<li>in:description xxx // 按照description搜索</li>
+<li>stars:&gt;xxx // stars数大于xxx</li>
+<li>forks:&gt;3000 // forks数大于xxx</li>
+<li>language:xxx // 编程语言是xxx</li>
+<li>pushed:&gt;YYYY-MM-DD // 最后更新时间大于YYYY-MM-DD</li>
+</ul>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var notify = 'true' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "lIUVFnvUirJfUF0CjhXFqIJP-gzGzoHsz",
+        app_key: "CnpO2xWcovQj6agvm1K7CiTH",
+        placeholder: "（务必填上邮箱与昵称，否则无法评论哦！）",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "学习笔记—Git_Github&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+      icon: "§"
+      
+    };
+    var el = "h1,h2,h3,h4".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

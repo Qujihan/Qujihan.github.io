@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="渠继涵">
+  <meta name="keywords" content="">
+  <title>环境搭建—VSCode搭建C++与CMake环境 - 渠哈哈的博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>渠哈哈的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" false
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期六, 十二月 7日 2019, 1:20 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    1k 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>这篇文章写在VSCode在Window下，如何搭建环境写C/C++程序的</p>
+<a id="more"></a>
+
+<p>VSCode的超高颜值吸引了一大批用户来使用VSCode，相比于VC6.0、Dev-C++等软件的上世纪界面，VSCode简直是降维打击。当然，轻便VSCode的优点，Visual Studio太大，CLion太重，VSCode这股清流便吸引了我们的眼光</p>
+<p>这篇文章将如何在VSCode中配置C/C++环境，如果你刚开始学习C/C++（还没学习多文件编译等），平时只是写写算法题，那么你只看前面不涉及CMake的内容就可以了（前面带有CMake的就可以跳过）。否则你就要全看啦！</p>
+<h3 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h3><ol>
+<li>Visual Studio Code的下载：<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">点击这里：官网下载</a><ol>
+<li><strong>安装的时候别忘了把open with code勾选上！！</strong></li>
+<li>如果不是中文的话，可以安装插件Chinese(Simplified) Language</li>
+<li>安装插件C/C++</li>
+<li>安装插件C++ Intellisense</li>
+<li>（CMake）安装插件CMake</li>
+<li>（CMake）安装插件CMake Tools</li>
+</ol>
+</li>
+<li>MinGW-w64的下载：<a href="https://sourceforge.net/projects/mingw-w64/files/" target="_blank" rel="noopener">点击这里：sourceforge下载</a><ol>
+<li>点击Download Latest Version（<strong>安装到没有空格、非ASCII码的目录地址下！</strong><del>默认地址不可以</del>）</li>
+<li>在setting界面中，Architecture选择x86_64</li>
+<li>安装后将安装目录中的bin文件夹添加到<strong>用户变量</strong>里</li>
+<li>在cmd中输入<code>gcc -v</code>，显示版本信息即安装成功，不显示可以重启试试</li>
+</ol>
+</li>
+<li>（CMake）CMake的下载：<a href="https://cmake.org/download/" target="_blank" rel="noopener">点击这里：官网下载</a><ol>
+<li>选择cmake-(这里是版本号)-rc1-win64-x64.msi（Linux与Mac选适合自己系统的）</li>
+<li>在cmd中输入<code>cmake --version</code>，显示版本信息即安装成功，不显示可以重启试试</li>
+</ol>
+</li>
+</ol>
+<h3 id="二、C-C-单文件-参考链接"><a href="#二、C-C-单文件-参考链接" class="headerlink" title="二、C/C++单文件   参考链接"></a>二、C/C++单文件   <a href="https://code.visualstudio.com/docs/cpp/config-mingw" target="_blank" rel="noopener">参考链接</a></h3><h4 id="1、创建工程目录"><a href="#1、创建工程目录" class="headerlink" title="1、创建工程目录"></a>1、创建工程目录</h4><p>​    在目录没有空格与非ASCII码的地方新建一个文件夹，并在VSCode中打开这个文件夹</p>
+<h4 id="2、配置c-cpp-properties-json文件"><a href="#2、配置c-cpp-properties-json文件" class="headerlink" title="2、配置c_cpp_properties.json文件"></a>2、配置c_cpp_properties.json文件</h4><ol>
+<li><p>在VSCode中按Ctrl+Shift+P，输入Edit configurations(UI)</p>
+</li>
+<li><p>看一下编译器路径有没有自动填充上，没有的话关闭VSCode再打开，如果还不行，就检查MinGW-w64是否安装成功</p>
+</li>
+<li><p>更改</p>
+<ul>
+<li>intelliSenseMode模式改为 ${default}</li>
+</ul>
+</li>
+</ol>
+<h4 id="3、配置tasks-json与launch-json文件"><a href="#3、配置tasks-json与launch-json文件" class="headerlink" title="3、配置tasks.json与launch.json文件"></a>3、配置tasks.json与launch.json文件</h4><ol>
+<li><p>在目录下新建demo.cpp文件📃</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+int main(){
+    printf(&quot;hello world&quot;);
+}</code></pre>
+</li>
+<li><p>写完以后按F5—&gt;C++(GDB/LLDB)—&gt;g++.exe……—&gt;(出错了)取消</p>
+<p><img src="%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E2%80%94VSCode%E6%90%AD%E5%BB%BAC++%E4%B8%8ECMake%E7%8E%AF%E5%A2%83/launch_tasks.gif" srcset="/img/loading.gif" alt="launch_tasks"></p>
+</li>
+<li><p>如果想使用那种黑框框cmd，而不是使用VSCode集成的命令行，可以将launch.json中的externalConsole选项改为true</p>
+</li>
+<li><p>现在就可以用了！可以在行号打断点，按F5 debug，不打断点就是直接执行（第四部分会说一下会遇到的问题，不要跳过）</p>
+</li>
+</ol>
+<h3 id="三、（CMake）多文件"><a href="#三、（CMake）多文件" class="headerlink" title="三、（CMake）多文件"></a>三、（CMake）多文件</h3><ol>
+<li><p>在VSCode中按Ctrl+Shift+P，输入CMake:Scan for Kits</p>
+</li>
+<li><p>在VSCode中按Ctrl+Shift+P，输入CMake:Config</p>
+</li>
+<li><p>在右下角点击快速启动新的CMake项目</p>
+</li>
+<li><p>输入新的项目名称</p>
+</li>
+<li><p>选择 Executable 创建可执行文件，等一会</p>
+</li>
+<li><p>在出现的一个main.cpp文件中执行上面动图的那些操作</p>
+</li>
+<li><p>下面进行修改与删除</p>
+<ol>
+<li>删除tasks.json文件</li>
+<li>删除launch.json中的<code>&quot;preLaunchTask&quot;: &quot;g++.exe build active file&quot;</code>这一行</li>
+<li>修改<code>&quot;program&quot;: &quot;${fileDirname}\\${fileBasenameNoExtension}.exe&quot;,</code>为<code>&quot;program&quot;: &quot;${command:cmake.launchTargetPath}&quot;,</code></li>
+</ol>
+</li>
+<li><p>在建立与build平级的文件夹📁inc与📂src</p>
+</li>
+<li><p>将CMakeLists.txt的内容修改为</p>
+<pre><code class="txt"># 最低CMake版本要求
+cmake_minimum_required(VERSION 3.10.0)
+
+# 项目名称
+project(cmake-project-name)
+
+# 设置C/C++标准
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# 头文件路径
+include_directories(&quot;inc&quot;)
+
+# 枚举头文件
+file(GLOB_RECURSE INCLUDES &quot;inc/*.h&quot; &quot;inc/*.hpp&quot;)
+
+# 枚举源文件
+aux_source_directory(&quot;src&quot; SOURCES)
+
+# 输出路径
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+
+# 生成可执行的文件
+add_executable(${PROJECT_NAME} ${SOURCES} ${INCLUDES})</code></pre>
+</li>
+<li><p>以后将头文件写在inc文件夹中，将.cpp/.c/.c文件写在src文件中，每次新添加了文件都要重新生成</p>
+<p><img src="%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E2%80%94VSCode%E6%90%AD%E5%BB%BAC++%E4%B8%8ECMake%E7%8E%AF%E5%A2%83/cmake.png" srcset="/img/loading.gif" alt="cmake"></p>
+</li>
+<li><p>Debug等与上面的相同</p>
+</li>
+</ol>
+<h3 id="四、疑难杂症"><a href="#四、疑难杂症" class="headerlink" title="四、疑难杂症"></a>四、疑难杂症</h3><ol>
+<li>使用cmd输出中文乱码问题<ol>
+<li>问题原因：<br>VSCode是UTF8编码，而cmd与powershell是GBK编码</li>
+<li>解决方法①：打开控制面板—&gt;时钟与区域—&gt;更改日期、时间……—&gt;管理（选项卡）—&gt;更改系统区域设置—&gt;Beta版：使用……        最后重启即可</li>
+<li>解决方法②：在tasks.json的args中添加<code>&quot;-fexec-charset=GB18030&quot;,</code>更改exe文件的编码</li>
+</ol>
+</li>
+</ol>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var notify = 'true' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "lIUVFnvUirJfUF0CjhXFqIJP-gzGzoHsz",
+        app_key: "CnpO2xWcovQj6agvm1K7CiTH",
+        placeholder: "（务必填上邮箱与昵称，否则无法评论哦！）",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "环境搭建—VSCode搭建C++与CMake环境&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+      icon: "§"
+      
+    };
+    var el = "h1,h2,h3,h4".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

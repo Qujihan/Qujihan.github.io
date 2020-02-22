@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="渠继涵">
+  <meta name="keywords" content="">
+  <title>学习笔记—正则表达式 - 渠哈哈的博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css"  >
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>渠哈哈的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" false
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 十二月 15日 2019, 3:50 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    1k 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>正则表达式(regular expression)描述了一种字符串匹配的模式（pattern），可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
+<a id="more"></a>
+
+<p>TODO：后向引用</p>
+<h3 id="一、元字符及其实例"><a href="#一、元字符及其实例" class="headerlink" title="一、元字符及其实例"></a>一、元字符及其实例</h3><h4 id="1、元字符以及重复"><a href="#1、元字符以及重复" class="headerlink" title="1、元字符以及重复"></a>1、元字符以及重复</h4><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\w</td>
+<td>word 匹配字母、数字、下划线以及汉字</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>word 匹配<strong>不是</strong>字母、数字、下划线以及汉字的字符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>space 匹配空白符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>space 匹配<strong>不是</strong>空白符的字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>digit 匹配数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>digit 匹配<strong>不是</strong>数字的字符</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词的开始或单词的结束</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配<strong>不是</strong>  单词的开始或单词的结束  的位置</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符（\n、\r）之外的任何单个字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串的结束（\n之前的位置）</td>
+</tr>
+<tr>
+<td>[^x]</td>
+<td>匹配除了x以外的所有字符</td>
+</tr>
+</tbody></table>
+<h4 id="2、转义"><a href="#2、转义" class="headerlink" title="2、转义"></a>2、转义</h4><p>使用\可以转义，使用  <strong>\.</strong>  可以匹配  <strong>.</strong>  </p>
+<h4 id="3、重复"><a href="#3、重复" class="headerlink" title="3、重复"></a>3、重复</h4><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>匹配前面的子表达式<strong>零次或多次</strong></td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式<strong>零次或一次</strong></td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式<strong>一次或多次</strong></td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配前面的子表达式<strong>n次</strong></td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配前面的子表达式<strong>n次或更多次</strong></td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>匹配前面的子表达式<strong>n到m次</strong></td>
+</tr>
+<tr>
+<td>|</td>
+<td>把不同的规则分隔开，从左到右测试每个条件，如果满足某一个分支，就不继续往下匹配</td>
+</tr>
+</tbody></table>
+<h4 id="4、例子"><a href="#4、例子" class="headerlink" title="4、例子"></a>4、例子</h4><ul>
+<li>匹配<code>0_ _(2位) - _ _ _ _ _ _ _ _(8位)</code>与<code>0_ _ _(3位) - _ _ _ _ _ _ _(7位)</code>（匹配电话号码）<ol>
+<li><code>^ 0\d{2,3}-\d{7,8} $</code></li>
+<li><code>0\d{2}-\d{8} | 0\d{3}-\d{7}</code></li>
+</ol>
+</li>
+<li>匹配021-12345678 / (021)12345678 / 021 12345678 / 052-1234567 / 0632 5882967这样不同的电话号码<ol>
+<li><code>^  [(]? 0 \d{2,3} [\s-)] \d{7,8} $</code>（不严谨）</li>
+</ol>
+</li>
+</ul>
+<h4 id="5、说明"><a href="#5、说明" class="headerlink" title="5、说明"></a>5、说明</h4><ul>
+<li>[0-9] == \d</li>
+<li>[a-z0-9A-Z] == \w</li>
+</ul>
+<h3 id="二、正则表达式的分组"><a href="#二、正则表达式的分组" class="headerlink" title="二、正则表达式的分组"></a>二、正则表达式的分组</h3><h4 id="1、分组"><a href="#1、分组" class="headerlink" title="1、分组"></a>1、分组</h4><ul>
+<li>使用（）将表达式做成子集</li>
+<li>方便对match的字符串进行划分</li>
+<li>分组的命名：<code>(?&lt;groupname&gt; exp)</code></li>
+<li>匹配但不捕获：<code>(?:exp)</code></li>
+</ul>
+<h4 id="2、贪婪与懒惰"><a href="#2、贪婪与懒惰" class="headerlink" title="2、贪婪与懒惰"></a>2、贪婪与懒惰</h4><ul>
+<li>贪婪（尽可能的多）<ul>
+<li><code>a.*b</code>：（aabab）—&gt; aabab  （非得找到最后一个匹配的）</li>
+</ul>
+</li>
+<li>懒惰（尽可能的少）<ul>
+<li><code>a.*?b</code>：（aabab）—&gt; aab  （找到第一个匹配的就满足了）</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*？</td>
+<td>重复任意次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>+？</td>
+<td>重复1次或更多次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>？？</td>
+<td>重复0次或1次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,m}?</td>
+<td>重复n到m次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,}?</td>
+<td>重复n次以上，但尽可能少重复</td>
+</tr>
+</tbody></table>
+<h3 id="三、其他知识"><a href="#三、其他知识" class="headerlink" title="三、其他知识"></a>三、其他知识</h3><h4 id="1、后向引用"><a href="#1、后向引用" class="headerlink" title="1、后向引用"></a>1、后向引用</h4><h4 id="2、零宽断言"><a href="#2、零宽断言" class="headerlink" title="2、零宽断言"></a>2、零宽断言</h4><p>​    查找一种单词—它里面出现了字母q，但是q后面跟的不是u，如果使用<code>\b\w*q[^u]\w*\b</code>，会发现banq这种单词选不出来，因为q后面必须要有一个位置，banq的q后面没有位置了这时候就需要使用零宽了</p>
+<p>​    换句话说零宽的作用：<strong>只查找，不占位</strong></p>
+<ul>
+<li>零宽度正预测先行断言<ul>
+<li>用法：<code>(?=exp)</code></li>
+<li>示例：<code>\b\w+(?=ing\b)</code>—&gt;I’m <strong>sing</strong>ing while you’re <strong>danc</strong>ing</li>
+</ul>
+</li>
+<li>零宽度正回顾后发断言<ul>
+<li>用法：<code>(?&lt;=exp)</code></li>
+<li>示例：<code>(?&lt;=\bre)\w+\b</code>—&gt;re<strong>ading</strong> a book</li>
+</ul>
+</li>
+<li>零宽度负回顾先行断言<ul>
+<li>用法：<code>(?!exp)</code></li>
+<li>示例：匹配带q且后面不是u的单词：<code>\b\w*q(?!u)\w*\b</code></li>
+<li>示例：匹配三位数字且后面不是数字的：<code>\d{3}(?!\d)</code></li>
+<li>示例：匹配不包含abc的单词：<code>\b((?!abc)\w)\b</code></li>
+</ul>
+</li>
+<li>零宽度负回顾后发断言<ul>
+<li>用法：<code>(?&lt;!exp)</code></li>
+<li>示例：匹配前面不是小写字母的七位数字：<code>(?&lt;![a-z])\d{7}</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="3、平衡组／递归匹配"><a href="#3、平衡组／递归匹配" class="headerlink" title="3、平衡组／递归匹配"></a>3、平衡组／递归匹配</h4><ul>
+<li><code>(?&#39;group&#39;)</code>：把捕获的内容命名为group,并压入堆栈</li>
+<li><code>(?&#39;-group&#39;)</code>：弹出group分组的内容，若栈空则匹配失败</li>
+<li><code>(?(group) yes|no)</code>:如果栈中存在名为group的捕获内容，则匹配yes内容，否则匹配no</li>
+<li><code>(?!)</code>：零宽度负回顾先行断言</li>
+</ul>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var notify = 'true' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "lIUVFnvUirJfUF0CjhXFqIJP-gzGzoHsz",
+        app_key: "CnpO2xWcovQj6agvm1K7CiTH",
+        placeholder: "（务必填上邮箱与昵称，否则无法评论哦！）",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "学习笔记—正则表达式&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+      icon: "§"
+      
+    };
+    var el = "h1,h2,h3,h4".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
